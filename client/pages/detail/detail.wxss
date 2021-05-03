@@ -1,0 +1,57 @@
+/* client/pages/detail/detail.wxss */
+.showimage {
+  margin-top: var(--space-4);
+  width: 100vw;
+  text-align: center;
+}
+.prize {
+  margin: var(--space-4);
+  box-shadow: var(--shadow-avatar);
+  background: var(--font-white);
+  padding: 30rpx;
+  line-height: 100%;
+}
+.prize-title {
+  display: inline-block;
+  font-weight: bolder;
+  margin-right: 30rpx;
+}
+.desc-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.desc-dtl {
+  font-size: var(--font-size-2);
+  text-indent: 2em;
+}
+.join-btn {
+  background: var(--font-red);
+  height: 80px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin: auto;
+  color: var(--font-white);
+}
+.join-btn-wait {
+  color: var(--font--green);
+  font-size: var(--font-size-0);
+  margin: auto;
+  text-align: center;
+  margin: 0 20px;
+}
+.join-tip {
+  color: var(--font-color-2);
+  text-align: center;
+}
+.cur-user {
+  margin: 10px 0;
+}
+.cur-user .user-item {
+  border: unset;
+}
+.users-title {
+  text-align: center;
+}

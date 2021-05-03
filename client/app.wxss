@@ -1,0 +1,28 @@
+/**app.wxss**/
+@import './style/var.wxss';
+@import './style/iconfont.wxss';
+page {
+  background: var(--page-color);
+  box-sizing: border-box;
+  color: var(--font-color-0);
+  overflow: hidden;
+  font-family: "Courier New", Courier, monospace;
+}
+.hide-scroll {
+  width: 120vw;
+  height: 100vh;
+  padding-right: 20vw;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+button {
+  background: initial;
+}
+
+button:focus{
+  outline: 0;
+}
+
+button::after{
+  border: none;
+}

@@ -1,0 +1,43 @@
+/* pages/home/home.wxss */
+.card {
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--font-red);
+}
+.card .image {
+  width: 100vw;
+  vertical-align: middle;
+}
+.prize-title {
+  padding: 10rpx 30rpx;
+  font-weight: bolder;
+}
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx 20rpx;
+}
+.bottom .left {
+  display: flex;
+  align-items: center;
+}
+.bottom .avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  box-shadow: var(--shadow-avatar);
+}
+.bottom .name {
+  font-size: var(--font-size-2);
+}
+.bottom .right {
+  margin-right: 30rpx;
+  background: var(--font-red);
+  color: #FFFFFF;
+  font-weight: 300;
+  font-size: var(--font-size-2);
+  border-radius: 40rpx;
+  padding: 6rpx var(--space-4);
+}

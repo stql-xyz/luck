@@ -1,0 +1,45 @@
+page {
+
+  font-size: 32rpx;
+
+  --avatar-width: 140rpx;
+
+  --primary-color: greenyellow;
+  --placeholder-color: #c8c9cc;
+
+  --page-color: #F6F6F6;
+  --white: #FFFFFF;
+  --bg-2: #fff;
+  --bg-4: #4c4c4c;
+  --mask-bg: rgba(0, 0, 0, 0.6); /* 蒙层黑色 */
+  --step-bg: #f2f3f5;
+  --tip-time-bg:  linear-gradient(135deg, #6fc4f6, #3ea2dc);
+  --time-bg: #55b9f3;
+
+  --space-0: 60rpx;
+  --space-1: 40rpx;
+  --space-2: 32rpx;
+  --space-3: 24rpx;
+  --space-4: 16rpx;
+
+  --shadow-card: -0.2em -0.2em 0.4em rgba(255, 255, 255, 0.35), 0.2em 0.2em 0.4em rgba(166, 181, 208, 0.74);
+  --shadow-avatar: -0.1em -0.1em 0.2em rgba(255, 255, 255, 0.35), 0.1em 0.1em 0.2em rgba(166, 181, 208, 0.74);
+
+  --font-color-0: rgba(0, 0, 0, 0.9);
+  --font-color-1: rgba(0, 0, 0, 0.5);
+  --font-color-2: rgba(0, 0, 0, 0.3);
+  --font-color-3: rgba(0, 0, 0, 0.1);
+
+  --font-yellow: #cc9c00;
+  --font--green: #06ae56;
+  --font-blue: #10aeff;
+  --font-red: #fa5151;
+  --font-white: #FFFFFF;
+
+  --font-size-0: 34rpx;
+  --font-size-1: 32rpx;
+  --font-size-2: 28rpx;
+
+  --border-0: 1px solid rgba(0, 0, 0, 0.3);
+  --border-1: 1px solid rgba(0, 0, 0, 0.1);
+}

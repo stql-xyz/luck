@@ -1,0 +1,39 @@
+/* client/pages/edit/edit.wxss */
+.show {
+  padding: 1vw;
+}
+.show .image {
+  margin: 1vw;
+  width: 30vw;
+  height: 30vw;
+}
+.show .title, .show .desc {
+  margin: 10px;
+  background: var(--font-white);
+  border: var(--border-0);
+}
+.edit {
+  padding: var(--space-2);
+}
+.edit .swiper {
+  margin: 10px auto;
+}
+.edit .swiper-btn {
+  border: 1px solid var(--font--green);
+}
+.edit .title {
+  border: 1px solid var(--font-blue);
+  background: var(--font-white);
+  padding: 10px;
+}
+.edit .detail {
+  margin-top: 20px;
+  border: 1px solid var(--font-blue);
+  background: var(--font-white);
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.edit .submit {
+  margin: 20px auto;
+}

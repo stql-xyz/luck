@@ -1,0 +1,18 @@
+<!--client/pages/edit/edit.wxml-->
+<view class="hide-scroll">
+  <view class="show">
+    <image mode="heightFix" class="image" src="{{cover}}"/>
+    <view class="title">{{prize_title}}</view>
+    <view class="desc">
+      <text space="nbsp" decode="{{true}}">{{prize_desc}}</text>
+    </view>
+  </view>
+  <view class="edit">
+    <view class="swiper">
+      <button class="swiper-btn" type="warn" bindtap="handleUploadImage">上传轮播图图片</button>
+    </view>
+    <input class="title" placeholder="请输入奖品名称" model:value="{{prize_title}}"/>
+    <textarea class="detail" model:value="{{prize_desc}}" maxlength="{{-1}}"/>
+    <button class="submit" type="primary" bindtap="setPrizeData">提交</button>
+  </view>
+</view>

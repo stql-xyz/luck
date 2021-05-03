@@ -1,0 +1,36 @@
+<!--client/pages/detail/detail.wxml-->
+<view class="hide-scroll">
+  <view>
+    <view class="showimage">
+      <image class="image" mode="heightFix" src="{{prize_dtl.cover}}" />
+    </view>
+    <view class="prize" style="margin-top: 0">
+      <text class="prize-title">奖品: {{prize_dtl.prize_title}}</text>
+      <text wx:if="{{prize_dtl.prize_title}}">x1份</text>
+    </view>
+    <view class="prize">
+      <view class="desc-title">抽奖说明</view>
+      <view class="desc-dtl">{{prize_dtl.prize_desc}}</view>
+    </view>
+  </view>
+  <view class="prize" style="min-height: 100rpx">
+    <block wx:if="{{prize_cur._id}}">
+      <view class="join-btn-wait">待开奖</view>
+      <view class="cur-user">
+        <user-item prize_user="{{prize_cur}}" />
+      </view>
+    </block>
+    <view wx:elif="{{prize_cur}}" class="join-btn" bindtap="setPrize">点击参与</view>
+    <!-- <view class="join-btn">去观看</view>
+    <view class="join-tip">观看视频提高一倍中奖机会</view> -->
+  </view>
+  <view class="prize">
+    <view class="users-title">
+      中奖码
+      <text wx:if="{{prize_user_count}}">（已有{{prize_user_count}}人参与）</text>
+    </view>
+    <block wx:for="{{prize_user}}" wx:key="_id">
+      <user-item prize_user="{{item}}" />
+    </block>
+  </view>
+</view>

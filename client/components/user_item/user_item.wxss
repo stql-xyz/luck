@@ -1,0 +1,35 @@
+/* components/user_item/user_item.wxss */
+.user-item {
+  min-height: 81rpx;
+  border-bottom: 1px solid var(--placeholder-color);
+}
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 80rpx;
+  box-sizing: content-box;
+}
+.user .user-key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user .key {
+  font-size: var(--font-size-2);
+}
+.user .icon-down, .user .icon-up {
+  margin-left: 10rpx;
+  color: var(--font-color-2);
+}
+.user .hidden {
+  visibility: hidden;
+}
+.user .avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+.user .rate {
+  color: var(--font-color-2);
+}
