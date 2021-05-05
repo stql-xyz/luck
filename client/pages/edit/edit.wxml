@@ -1,8 +1,11 @@
 <!--client/pages/edit/edit.wxml-->
 <view class="hide-scroll">
   <view class="show">
-    <image mode="heightFix" class="image" src="{{cover}}"/>
+    <view style="text-align: center">
+      <image mode="heightFix" class="image" src="{{cover}}"/>
+    </view>
     <view class="title">{{prize_title}}</view>
+    <view wx:if="{{prize_end}}" style="margin-left: 10px">开奖: {{prize_end}}({{endTime}}后)</view>
     <view class="desc">
       <text space="nbsp" decode="{{true}}">{{prize_desc}}</text>
     </view>
@@ -10,6 +13,14 @@
   <view class="edit">
     <view class="swiper">
       <button class="swiper-btn" type="warn" bindtap="handleUploadImage">上传轮播图图片</button>
+    </view>
+    <view class="picker">
+        <picker bindchange="bindDateChange" mode="date" value="{{date}}">
+          <button>点击选择日期</button>
+        </picker>
+        <picker bindchange="bindHourChange" range="{{hour_array}}" value="{{index}}">
+          <button>点击选择小时</button>
+        </picker> 
     </view>
     <input class="title" placeholder="请输入奖品名称" model:value="{{prize_title}}"/>
     <textarea class="detail" model:value="{{prize_desc}}" maxlength="{{-1}}"/>

@@ -1,0 +1,27 @@
+<!--pages/edit_list/edit_list.wxml-->
+<view class="hide-scroll edit-prize">
+  <view>
+    <view
+      class="hiscard"
+      wx:for="{{prize_list}}"
+      wx:key="prize_id"
+      id="{{item.prize_id}}"
+      bindtap="handleCardClick"
+      hover-class="hover-clx"
+    >
+      <image class="image" src="{{item.cover}}" />
+      <view class="right">
+        <view class="prize-title">奖品: {{item.prize_title}}</view>
+        <view class="bottom">
+            <image class="avatar" mode="scaleToFill" src="{{item.avatar_url}}"/>
+            <view class="name">{{item.nickname}}</view>
+          </view>
+      </view>
+      <view wx:if="{{item.prize_user > 0}}" class="status-ing">已参与</view>
+      <view wx:else class="status-ing">去抽奖</view>
+    </view>
+   <navigator class="add-prize" url="/pages/edit/edit">
+    <button type="primary">新增抽奖</button>
+   </navigator>
+  </view>
+</view>

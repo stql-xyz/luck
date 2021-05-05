@@ -7,7 +7,7 @@
 .prize {
   margin: var(--space-4);
   box-shadow: var(--shadow-avatar);
-  background: var(--font-white);
+  background: var(--white);
   padding: 30rpx;
   line-height: 100%;
 }
@@ -15,6 +15,11 @@
   display: inline-block;
   font-weight: bolder;
   margin-right: 30rpx;
+}
+.prize .open {
+  margin-top: 10px;
+  color: var(--font-color-1);
+  font-size: var(--font-size-2);
 }
 .desc-title {
   text-align: center;
@@ -29,11 +34,12 @@
   height: 80px;
   width: 80px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   margin: auto;
-  color: var(--font-white);
+  color: var(--white);
 }
 .join-btn-wait {
   color: var(--font--green);
@@ -42,9 +48,21 @@
   text-align: center;
   margin: 0 20px;
 }
+.service {
+  padding: 15rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fail-btn {
+  text-align: center;
+  color: var(--font-color-2);
+  font-size: var(--font-size-0);
+}
 .join-tip {
   color: var(--font-color-2);
   text-align: center;
+  margin-top: 10rpx;
 }
 .cur-user {
   margin: 10px 0;
@@ -52,6 +70,34 @@
 .cur-user .user-item {
   border: unset;
 }
+.end_luck {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 80rpx;
+  box-sizing: content-box;
+}
+.end_luck .avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+.end_luck .key {
+  font-size: var(--font-size-2);
+  margin-right: calc(8px + 10rpx);
+}
+.end_luck .iconfont {
+  font-size: 32rpx !important;
+  text-align: center;
+  padding: 10px;
+  margin-right: -8px;
+}
 .users-title {
   text-align: center;
+}
+.bottom-tip {
+  margin-top: 40rpx;
+  line-height: 30rpx;
+  text-align: center;
+  color: var(--font-color-1);
 }

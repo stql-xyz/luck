@@ -1,26 +1,25 @@
-<!--pages/home/home.wxml-->
+<!--client/pages/history/history.wxml-->
 <view class="hide-scroll">
-  <view wx:if="{{prize_list.length}}">
+  <view wx:if="{{prize_list.length > 0}}">
     <view
-      class="card"
+      class="hiscard"
       wx:for="{{prize_list}}"
       wx:key="prize_id"
       id="{{item.prize_id}}"
       bindtap="handleCardClick"
+      hover-class="hover-clx"
     >
-      <image class="image" mode="heightFix" src="{{item.cover}}" />
-      <view hover-class="hover-clx">
+      <image class="image" src="{{item.cover}}" />
+      <view class="right">
         <view class="prize-title">奖品: {{item.prize_title}}</view>
         <view class="bottom">
-          <view class="left">
             <image class="avatar" mode="scaleToFill" src="{{item.avatar_url}}"/>
             <view class="name">{{item.nickname}}</view>
           </view>
-          <view wx:if="{{item.prize_user}}" class="right join">已参与</view>
-          <view wx:else class="right">去抽奖</view>
-        </view>
       </view>
+      <view wx:if="{{item.is_end}}" class="status-end">已结束</view>
+      <view wx:else class="status-ing">进行中</view>
     </view>
   </view>
-  <empty-data wx:elif="{{prize_list !== ''}}"/>
+  <empty-data wx:elif="{{prize_list !== ''}}" />
 </view>

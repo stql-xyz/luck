@@ -1,0 +1,17 @@
+{
+  "name": "prize_end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto-js": "^4.0.0",
+    "got": "^11.8.2",
+    "node-xlsx": "^0.16.1",
+    "wx-server-sdk": "~2.4.0"
+  }
+}

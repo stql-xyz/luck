@@ -3,7 +3,11 @@
     "pages/home/home",
     "pages/my/my",
     "pages/detail/detail",
-    "pages/edit/edit"
+    "pages/edit/edit",
+    "pages/history/history",
+    "pages/edit_list/edit_list",
+    "pages/analysis/analysis",
+    "pages/web_view/web_view"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -1,0 +1,8 @@
+<!--client/pages/analysis/analysis.wxml-->
+<view class="prize_rule">
+  <view>奖品: {{prize_title}}</view>
+  <view>参与人数: {{user_count}}</view>
+  <view>中奖码数量: {{key_total}}</view>
+  <view>随机因子(最近上证指数): {{end_factor}}</view>
+  <view style="margin-bottom: 0" bindtap="handleCopy">原始数据: 点击复制下载链接 </view>
+</view>

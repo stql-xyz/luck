@@ -1,0 +1,22 @@
+/* components/mine/empty_data/empty_data.wxss */
+.empty-data {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100vw;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.iconfont, .tip {
+    color: var(--font-color-2);
+    margin-bottom: var(--space-0);
+    display: inline-block;
+}
+.iconfont {
+    font-size: 160rpx;
+}

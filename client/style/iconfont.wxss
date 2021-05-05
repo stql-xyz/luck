@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2519008 */
-  src: url('//at.alicdn.com/t/font_2519008_h4nl41qboa9.woff2?t=1619851191505') format('woff2'),
-       url('//at.alicdn.com/t/font_2519008_h4nl41qboa9.woff?t=1619851191505') format('woff'),
-       url('//at.alicdn.com/t/font_2519008_h4nl41qboa9.ttf?t=1619851191505') format('truetype');
+  src: url('//at.alicdn.com/t/font_2519008_mep1j71tt.woff2?t=1620200698173') format('woff2'),
+       url('//at.alicdn.com/t/font_2519008_mep1j71tt.woff?t=1620200698173') format('woff'),
+       url('//at.alicdn.com/t/font_2519008_mep1j71tt.ttf?t=1620200698173') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,34 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-wenti:before {
+  content: "\e699";
+}
+
+.icon-kefu:before {
+  content: "\e6ac";
+}
+
+.icon-question:before {
+  content: "\e632";
+}
+
+.icon-touxiang:before {
+  content: "\e65f";
+}
+
+.icon-suanfa:before {
+  content: "\e6c8";
+}
+
+.icon-add:before {
+  content: "\e60e";
+}
+
+.icon-history:before {
+  content: "\e60d";
 }
 
 .icon-down:before {

@@ -9,7 +9,7 @@
 }
 .show .title, .show .desc {
   margin: 10px;
-  background: var(--font-white);
+  background: var(--white);
   border: var(--border-0);
 }
 .edit {
@@ -23,13 +23,13 @@
 }
 .edit .title {
   border: 1px solid var(--font-blue);
-  background: var(--font-white);
+  background: var(--white);
   padding: 10px;
 }
 .edit .detail {
   margin-top: 20px;
   border: 1px solid var(--font-blue);
-  background: var(--font-white);
+  background: var(--white);
   width: 100%;
   padding: 10px;
   box-sizing: border-box;

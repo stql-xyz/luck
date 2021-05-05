@@ -18,11 +18,11 @@ exports.main = async (event, context) => {
       const { userInfo = {} } = event;
       const { avatarUrl, nickName } = userInfo;
       const fileContent = await got(avatarUrl).buffer();
-      const { fileID } = await cloud.uploadFile({ cloudPath: `avatar/${user_id}.jpeg`, fileContent });
+      const { fileID } = await cloud.uploadFile({ cloudPath: `avatar/${user_id}_${new Date().valueOf()}.jpeg`, fileContent });
       const user = { ...userInfo, avatar_url: fileID, nickname: nickName };
       delete user.avatarUrl;
       delete user.nickName;
-      db.collection('user').doc(user_id).update({ data: { ...user }});
+      await db.collection('user').doc(user_id).update({ data: { ...user }});
       ctx.body = { ok: true };
     } catch (error) {
       log.error({ name: 'get_prize', error });

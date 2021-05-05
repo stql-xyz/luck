@@ -1,14 +1,18 @@
 /* pages/home/home.wxss */
 .card {
-  margin-bottom: 20px;
+  margin: 20px;
+  padding: unset 20px 5px 20px;
   overflow: hidden;
-  border-bottom: 1px solid var(--font-red);
+  text-align: center;
+  background: var(--white);
 }
 .card .image {
   width: 100vw;
   vertical-align: middle;
 }
 .prize-title {
+  text-align: left;
+  border-top: var(--border-1);
   padding: 10rpx 30rpx;
   font-weight: bolder;
 }
@@ -17,6 +21,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 10rpx 20rpx;
+  border-bottom: var(--border-1);
 }
 .bottom .left {
   display: flex;
@@ -40,4 +45,7 @@
   font-size: var(--font-size-2);
   border-radius: 40rpx;
   padding: 6rpx var(--space-4);
+}
+.bottom .join {
+  background: rgba(250, 81, 81, 0.6);
 }

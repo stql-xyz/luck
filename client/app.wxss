@@ -15,14 +15,16 @@ page {
   overflow-y: scroll;
   box-sizing: border-box;
 }
+/* 触摸特效 */
+.hover-clx {
+  opacity: 0.5;
+}
 button {
   background: initial;
 }
-
 button:focus{
   outline: 0;
 }
-
 button::after{
   border: none;
 }

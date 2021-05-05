@@ -1,0 +1,45 @@
+/* client/pages/history/history.wxss */
+.hiscard {
+  border: 1px solid green;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white);
+  margin: 20px;
+  border: var(--border-0);
+}
+.hiscard .image {
+  width: 100px;
+  height: 100px;
+  flex-grow: 0;
+  margin-right: 10px;
+}
+.hiscard .right {
+  height: 100px;
+  padding: unset 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.bottom {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.bottom .avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.hiscard .status-end {
+  margin-right: 10px;
+  font-size: var(--font-size-2);
+  color: var(--font-color-2);
+}
+.hiscard .status-ing {
+  margin-right: 10px;
+  font-size: var(--font-size-2);
+  color: var(--font--green);
+}

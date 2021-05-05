@@ -1,0 +1,12 @@
+<!--components/mine/row_cell/row_cell.wxml-->
+<view class="row" hover-class="hover-clx" bindtap="handleClick">
+  <view>
+    <text class="cell-icon"><slot name="icon"></slot></text>
+    <text wx:if="title" class="title">{{title}}</text>
+    <slot></slot>
+  </view>
+  <view>
+    <text wx:if="footer" class="footer">{{footer}}</text>
+    <text class="right-arrow"></text>
+  </view>
+</view>

@@ -34,7 +34,6 @@ page {
   --font--green: #06ae56;
   --font-blue: #10aeff;
   --font-red: #fa5151;
-  --font-white: #FFFFFF;
 
   --font-size-0: 34rpx;
   --font-size-1: 32rpx;

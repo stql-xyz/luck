@@ -5,6 +5,10 @@ const APP = getApp();
 Page({
 
   data: {
+    wx_num: 'xh3140877089',
+
+    is_win: '',
+
     prize_id: '',
     prize_dtl: '',
     prize_cur: '',
@@ -15,54 +19,63 @@ Page({
     prize_user: '',
     prize_user_count: '',
   },
+
   /** 获取当前抽奖详情 */
-  prize_dtl_loading: false,
-  async getPrizeDtl(){
-    const { prize_id } = this.data;
-    if (!prize_id) return;
-    wx.showLoading({ title: 'loading...' });
-    this.prize_dtl_loading = true;
-    try {
-      const cloud_res = await wx.cloud.callFunction({
-        name: 'prize',
-        data: { $url: 'get_prize', prize_id },
-      });
-      COMFUN.result(cloud_res).success(({ data }) => {
-        this.setData({ prize_dtl: data });
-      })
-    } catch (error) {
-      COMFUN.showErr({ type: 'get_prize_dtl', error });
-    }
-    this.prize_dtl_loading = false;
-    this.closeLoading();
-  },
-  closeLoading() {
-    if (!this.prize_cur_loading && !this.prize_dtl_loading) {
-      wx.hideLoading();
-    }
-  },
-  /** 获取当前用户抽奖状态 */
-  prize_cur_loading: false,
-  async getPrizeCur() {
+  async getPrizeDtl(hideLoading){
     const { prize_id } = this.data;
     const { _id: user_id } = await APP.getUser();
     if (!prize_id || !user_id) return;
-    wx.showLoading({ title: 'loading...' });
-    this.prize_cur_loading = true;
+    (hideLoading !== true) && wx.showLoading({ title: 'loading...' });
     try {
       const cloud_res = await wx.cloud.callFunction({
         name: 'prize',
-        data: { $url: 'get_prize_cur', prize_id, user_id },
+        data: { $url: 'get_prize', prize_id, user_id },
+      });
+      this.getPrizeUser();
+      COMFUN.result(cloud_res).success(({ prize_dtl, prize_cur, prize_user_count }) => {
+        this.setData({ prize_dtl, prize_cur, prize_user_count });
+      });
+      if (this.data.prize_dtl.is_end) {
+        const { end_luck_user_id, end_luck_code } = this.data.prize_dtl;
+        const { prize_key = [] } = this.data.prize_cur;
+        if (end_luck_user_id === user_id && prize_key.indexOf(end_luck_code) > -1) {
+          this.setData({ is_win: true });
+        } else {
+          this.setData({ is_end: false });
+        }
+      }
+    } catch (error) {
+      COMFUN.showErr({ type: 'get_prize_dtl', error });
+    }
+    (hideLoading !== true) && wx.hideLoading();
+  },
+
+  /** 获取当前抽奖用户列表 */
+  async getPrizeUser(force) {
+    const { prize_id, prize_user, limit, down, loading } = this.data;
+    if (!prize_id || loading) return;
+    if (force !== true && down) return;
+    this.setData({ loading: true });
+    try {
+      const cloud_res = await wx.cloud.callFunction({
+        name: 'prize',
+        data: {
+          $url: 'get_prize_user', 
+          prize_id,
+          total: prize_user.length,
+          limit,
+        },
       });
       COMFUN.result(cloud_res).success(({ data }) => {
-        this.setData({ prize_cur: data });
-      });
+        const prize_user = (this.data.prize_user || []).concat(data);
+        this.setData({ prize_user, down: !data.length });
+      })
     } catch (error) {
-      COMFUN.showErr({ type: 'get_prize_cur', error });
+      COMFUN.showErr({ type: 'get_prize_user', error });
     }
-    this.prize_cur_loading = false;
-    this.closeLoading();
+    this.setData({ loading: false });
   },
+
   /** 抽奖 */
   setLoading: false,
   async setPrize() {
@@ -71,7 +84,6 @@ Page({
     if (!prize_id || !user_id || this.setLoading) return;
     this.setLoading = true;
     const avatar_url = wx.getStorageSync('avatar_url');
-    console.log(avatar_url);
     if (!avatar_url) {
       let userProfile = '';
       try {
@@ -106,11 +118,10 @@ Page({
       });
       COMFUN.result(cloud_res).success(() => {
         wx.showToast({ title: '参与成功' });
-        this.getPrizeCur();
-        this.getPrizeUserCount();
         const { prize_user, limit } = this.data;
+        this.getPrizeDtl(true);
         if (prize_user.length < limit) {
-          this.getPrizeUser();
+          this.getPrizeUser(true);
         }
       });
     } catch (error) {
@@ -119,58 +130,21 @@ Page({
     wx.hideLoading();
     this.setLoading = false;
   },
-  /** 获取当前抽奖用户列表 */
-  async getPrizeUser() {
-    const { prize_id, prize_user, limit } = this.data;
-    if (!prize_id) return;
-    try {
-      const cloud_res = await wx.cloud.callFunction({
-        name: 'prize',
-        data: {
-          $url: 'get_prize_user', 
-          prize_id,
-          total: prize_user.length,
-          limit,
-        },
-      });
-      COMFUN.result(cloud_res).success(({ data }) => {
-        const prize_user = (this.data.prize_user || []).concat(data);
-        this.setData({ prize_user, down: !data.length });
-      })
-    } catch (error) {
-      COMFUN.showErr({ type: 'get_prize_user', error });
-    }
-  },
-  /** 获取当前参与抽奖人数 */
-  async getPrizeUserCount() {
-    const { prize_id } = this.data;
-    if (!prize_id) return;
-    try {
-      const cloud_res = await wx.cloud.callFunction({
-        name: 'prize',
-        data: { $url: 'get_prize_user_count', prize_id },
-      });
-      COMFUN.result(cloud_res).success(({ data }) => {
-        this.setData({ prize_user_count: data });
-      })
-    } catch (error) {
-      COMFUN.showErr({ type: 'get_prize_user_count', error });
-    }
-  },
+
   onLoad: function (options) {
-    LISTEN.on(LISTEN.keys.setUserInfo, this.getPrizeCur);
-    const { id:prize_id = '17453ede608d013405e7ddf51561b396' } = options;
-    this.setData({ prize_id });
-    this.getPrizeDtl();
-    this.getPrizeCur();
-    setTimeout(() => {
-      this.getPrizeUserCount();
-      this.getPrizeUser();
-    }, 100);
+    const { prize_id } = options;
+    this.setData({ prize_id }, this.getPrizeDtl);
+    LISTEN.on(LISTEN.keys.setUserInfo, this.getPrizeDtl);
+  },
+
+  handleCopy() {
+		getApp().vibrate();
+    const { wx_num } = this.data;
+    wx.setClipboardData({ data: wx_num });
   },
 
   onUnload: function () {
-    LISTEN.off(LISTEN.keys.setUserInfo, this.initPageUserData);
+    LISTEN.off(LISTEN.keys.setUserInfo, this.getPrizeDtl);
   },
 
   onPullDownRefresh: function () {

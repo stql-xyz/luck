@@ -1,0 +1,9 @@
+/* client/pages/analysis/analysis.wxss */
+.prize_rule {
+  margin: 20px;
+  padding: 20px;
+  background: var(--white);
+}
+.prize_rule view {
+  margin-bottom: 20px;
+}

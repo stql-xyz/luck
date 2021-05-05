@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "row-cell": "/components/row_cell/row_cell"
+  },
+  "enablePullDownRefresh": true
 }

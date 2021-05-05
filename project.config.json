@@ -21,7 +21,7 @@
     "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": false,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -37,7 +37,7 @@
     "packNpmRelationList": [],
     "minifyWXSS": true
   },
-  "appid": "wx9a5bdb1f4b43f493",
+  "appid": "wx898b81626105eb96",
   "projectname": "luck",
   "libVersion": "2.14.1",
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",

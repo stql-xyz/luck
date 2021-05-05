@@ -1,0 +1,5 @@
+<!-- components/mine/empty_data/empty_data.wxml -->
+<view class="empty-data">
+    <view class="iconfont iconempty"></view>
+    <view class="tip">{{empty_tip}}</view>
+</view>

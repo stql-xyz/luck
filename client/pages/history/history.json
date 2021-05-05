@@ -1,6 +1,5 @@
 {
   "usingComponents": {
     "empty-data": "/components/empty_data/empty_data"
-  },
-  "navigationBarTitleText": "免费抽奖"
+  }
 }

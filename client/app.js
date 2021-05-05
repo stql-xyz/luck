@@ -6,7 +6,7 @@ App({
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
       wx.cloud.init({
-        env: 'st-1g05trs8941c9deb',
+        env: 'test-9gxmzpqr89aa5721',
         traceUser: true,
       })
     }
@@ -31,5 +31,8 @@ App({
       }
     }
     return this.globalData.user;
-  }
+  },
+  vibrate() {
+		wx.vibrateShort({ type: 'heavy' });
+	},
 })

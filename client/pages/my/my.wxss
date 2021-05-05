@@ -1,1 +1,42 @@
 /* pages/my/my.wxss */
+page {
+  overflow: unset;
+}
+.wx-title {
+  margin: 40rpx;
+  padding: 10rpx;
+  height: 120rpx;
+  border: var(--border-0);
+  background: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wx-title .left {
+  display: flex;
+  align-items: center;
+}
+.wx-title .iconfont, .wx-title .image {
+  margin-right: 20rpx;
+  font-size: 80rpx;
+  height: 100rpx;
+  width: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  color: var(--font-color-2);
+}
+.wx-title .right {
+  font-size: var(--space-3);
+  color: var(--font-blue);
+  margin-right: 30px;
+}
+.iconfont {
+  font-size: var(--font-size-1);
+}
+.no-sty {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100vw !important;
+  font-weight: unset;
+  font-size: 32rpx;
+}

@@ -11,26 +11,7 @@
       "list": []
     },
     "miniprogram": {
-      "list": [
-        {
-          "id": -1,
-          "name": "db guide",
-          "pathName": "pages/databaseGuide/databaseGuide",
-          "query": ""
-        },
-        {
-          "name": "lyf",
-          "pathName": "pages/detail/detail",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "编辑",
-          "pathName": "pages/edit/edit",
-          "query": "",
-          "scene": null
-        }
-      ]
+      "list": []
     }
   }
 }

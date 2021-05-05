@@ -1,2 +1,33 @@
 <!--pages/my/my.wxml-->
-<text>pages/my/my.wxml</text>
+<view>
+  <view class="wx-title" hover-class="hover-clx" bindtap="syncUserInfo">
+    <view wx:if="{{user && user.avatar_url}}" class="left">
+      <image src="{{user.avatar_url}}" class="image" />
+      <view class="name">{{user.nickname}}</view>
+    </view>
+    <view wx:elif="{{user}}" class="left">
+      <view class="iconfont icon-touxiang"></view>
+      <view class="name">登陆</view>
+    </view>
+    <view wx:if="{{user && user.avatar_url}}" class="right">点击同步</view>
+  </view>
+  <row-cell title="历史记录" link="/pages/history/history">
+    <text slot="icon" class="iconfont icon-history"></text>
+  </row-cell>
+  <row-cell title="抽奖算法" link="/pages/web_view/web_view">
+    <text slot="icon" class="iconfont icon-suanfa"></text>
+  </row-cell>
+  <button open-type="contact" class="no-sty" hover-class="none">
+    <row-cell title="联系我们">
+      <text slot="icon" class="iconfont icon-kefu"></text>
+    </row-cell>
+  </button>
+  <button open-type="feedback" class="no-sty" hover-class="none">
+    <row-cell title="问题与反馈">
+      <text slot="icon" class="iconfont icon-question"></text>
+    </row-cell>
+  </button>
+  <row-cell wx:if="{{user && user._id === '28ee4e3e6092b276162d8b231806c8c2'}}" title="编辑抽奖" link="/pages/edit_list/edit_list">
+    <text slot="icon" class="iconfont icon-add"></text>
+  </row-cell>
+</view>
