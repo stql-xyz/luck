@@ -19,17 +19,17 @@ Page({
   },
   handleCopy() {
     const { tempFileURL } = this.data;
-    if (!tempFileURL) {
+    if (tempFileURL) {
+      COMFUN.vibrate();
+      wx.setClipboardData({ data: tempFileURL });
+    } else {
       wx.showToast({ title: '数据正在生成中、请稍等' });
-      return;
-    };
-    getApp().vibrate();
-    wx.setClipboardData({ data: tempFileURL });
+    }
   },
   async getAnalysisData() {
     const { prize_id } = this.data;
     if (!prize_id) return;
-    wx.showLoading();
+    wx.showLoading({ title: '加载中...' });
     try {
       const cloud_res = await wx.cloud.callFunction({
         name: 'prize',

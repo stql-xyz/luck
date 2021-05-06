@@ -140,6 +140,10 @@ class Comfun {
 			});
 		};
 	}
+	/** 震动 */
+	vibrate() {
+		wx.vibrateShort({ type: 'heavy' });
+	}
 }
 
 const comfun = new Comfun();

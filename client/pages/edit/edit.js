@@ -1,6 +1,6 @@
 // client/pages/edit/edit.js
 import COMFUN from '../../utils/comfun';
-const APP = getApp();
+import USER from '../../utils/user';
 Page({
   data: {
     prize_id: '',
@@ -63,12 +63,12 @@ Page({
       });
       if (!result.confirm) return;
       wx.showLoading();
-      const { _id: user_id } = await APP.getUser();
+      const user = USER.getUser();
       const cloud_res = await wx.cloud.callFunction({
         name: 'prize',
         data: {
           $url: 'set_prize',
-          user_id,
+          user_id: user._id,
           prize_id,
           cover,
           prize_end,
