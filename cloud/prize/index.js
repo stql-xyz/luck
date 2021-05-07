@@ -52,6 +52,7 @@ exports.main = async (event, context) => {
     try {
       const { list: data = [] } = await db.collection('prize_user')
         .aggregate()
+        .match({ user_id })
         .lookup({ from: 'prize', localField: 'prize_id', foreignField: '_id', as: 'prize' })
         .addFields({ prize: $.arrayElemAt(['$prize', 0]) })
         .group({
@@ -89,7 +90,6 @@ exports.main = async (event, context) => {
   /** 抽奖详情 */
   app.router('get_prize', async (ctx) => {
     try {
-      console.log(user_id, prize_id);
       const { data: prize_dtl } = await db.collection('prize').doc(prize_id).get();
       // 当前用户中奖码
       const { list: cur_user = [] } = await db.collection('prize_user')
@@ -145,14 +145,13 @@ exports.main = async (event, context) => {
   app.router('set_prize', async (ctx) => {
     const { user_id, cover, prize_end, prize_title, prize_desc } = event;
     try {
-      if (!prize_id) {
-        await db.collection('prize').add({ data: { user_id, cover, prize_end, prize_title, prize_desc }});
+      if (prize_id) {
+        await db.collection('prize').doc(prize_id).update({ data: { cover, prize_end, prize_title, prize_desc, update_time: db.serverDate() }});
       } else {
-        await db.collection('prize').doc(prize_id).update({ data: { cover, prize_end, prize_title, prize_desc }});
+        await db.collection('prize').add({ data: { user_id, cover, prize_end, prize_title, prize_desc, create_time: db.serverDate() }});
       }
       ctx.body = { ok: true };
     } catch (error) {
-      console.log(error, event);
       log.error({ name: 'set_prize', error });
       ctx.body = { ok: false };
     }

@@ -1,7 +1,8 @@
 // client/pages/detail/detail.js
 import COMFUN from '../../utils/comfun';
 import LISTEN from '../../utils/listen';
-const APP = getApp();
+import USER from '../../utils/user';
+
 Page({
 
   data: {
@@ -23,13 +24,14 @@ Page({
   /** 获取当前抽奖详情 */
   async getPrizeDtl(hideLoading){
     const { prize_id } = this.data;
-    const { _id: user_id } = await APP.getUser();
-    if (!prize_id || !user_id) return;
-    (hideLoading !== true) && wx.showLoading({ title: 'loading...' });
+    const user = USER.getUser();
+    if (!prize_id || !user) return;
+    (hideLoading !== true) && wx.showLoading({ title: '加载中...' });
+    LISTEN.off(this.getPrizeDtl); // 监听只执行一次
     try {
       const cloud_res = await wx.cloud.callFunction({
         name: 'prize',
-        data: { $url: 'get_prize', prize_id, user_id },
+        data: { $url: 'get_prize', prize_id, user_id: user._id },
       });
       this.getPrizeUser();
       COMFUN.result(cloud_res).success(({ prize_dtl, prize_cur, prize_user_count }) => {
@@ -38,7 +40,8 @@ Page({
       if (this.data.prize_dtl.is_end) {
         const { end_luck_user_id, end_luck_code } = this.data.prize_dtl;
         const { prize_key = [] } = this.data.prize_cur;
-        if (end_luck_user_id === user_id && prize_key.indexOf(end_luck_code) > -1) {
+        // 判断是否中奖
+        if (end_luck_user_id === user.user_id && prize_key.indexOf(end_luck_code) > -1) {
           this.setData({ is_win: true });
         } else {
           this.setData({ is_end: false });
@@ -80,41 +83,21 @@ Page({
   setLoading: false,
   async setPrize() {
     const { prize_id } = this.data;
-    const { _id: user_id } = await APP.getUser();
-    if (!prize_id || !user_id || this.setLoading) return;
+    const user = USER.getUser();
+    if (!prize_id || !user || this.setLoading) return;
     this.setLoading = true;
-    const avatar_url = wx.getStorageSync('avatar_url');
-    if (!avatar_url) {
-      let userProfile = '';
-      try {
-        const user = await COMFUN.wxPromise(wx.getUserProfile)({ desc: '用户中奖码头像展示与识别' });
-        userProfile = user.userInfo;
-      } catch (error) {
-        console.log(error);
-      }
-      if (!userProfile) {
-        COMFUN.showErrModal({ content: '您未授权头像，暂时无法参与抽奖、请重新点击授权' });
-        this.setLoading = false;
-        return;
-      }
-      wx.showLoading({ title: 'loading...' });
-      try {
-        const cloud_res = await wx.cloud.callFunction({
-          name: 'user',
-          data: { $url: 'set_userInfo', user_id, userInfo: userProfile },
-        });
-        COMFUN.result(cloud_res);
-        wx.setStorage({ key: 'avatar_url', data: userProfile.avatarUrl });
-      } catch (error) {
-        COMFUN.showErr({ type: 'set_userInfo', error });
-      }
-    } else {
-      wx.showLoading({ title: 'loading...' });
+    if (!user.avatar_url) {
+      await USER.updateCloudUser();
     }
+    if (!USER.getUser().avatar_url) {
+      wx.showToast({ title: '请先授权获取信息' });
+      return;
+    }
+    wx.showLoading({ title: '加载中...' });
     try {
       const cloud_res = await wx.cloud.callFunction({
         name: 'prize',
-        data: { $url: 'set_prize_join', prize_id, user_id },
+        data: { $url: 'set_prize_join', prize_id, user_id: user._id },
       });
       COMFUN.result(cloud_res).success(() => {
         wx.showToast({ title: '参与成功' });
@@ -131,20 +114,20 @@ Page({
     this.setLoading = false;
   },
 
-  onLoad: function (options) {
-    const { prize_id } = options;
-    this.setData({ prize_id }, this.getPrizeDtl);
-    LISTEN.on(LISTEN.keys.setUserInfo, this.getPrizeDtl);
-  },
-
   handleCopy() {
-		getApp().vibrate();
+    COMFUN.vibrate();
     const { wx_num } = this.data;
     wx.setClipboardData({ data: wx_num });
   },
 
+  onLoad: function (options) {
+    const { prize_id } = options;
+    this.setData({ prize_id }, this.getPrizeDtl);
+    LISTEN.on(this.getPrizeDtl);
+  },
+
   onUnload: function () {
-    LISTEN.off(LISTEN.keys.setUserInfo, this.getPrizeDtl);
+    LISTEN.off(this.getPrizeDtl);
   },
 
   onPullDownRefresh: function () {

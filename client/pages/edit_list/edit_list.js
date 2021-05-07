@@ -25,7 +25,7 @@ Page({
     this.getPrizeList();
   },
   onTabItemTap() {
-		getApp().vibrate();
+    COMFUN.vibrate();
   },
   onReachBottom: function () {
 

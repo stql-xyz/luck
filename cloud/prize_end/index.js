@@ -3,6 +3,7 @@ const cloud = require('wx-server-sdk')
 const CryptoJS = require('crypto-js');
 const got = require('got');
 const nodeXlsx = require('node-xlsx');
+const moment = require('moment');
 
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 const db = cloud.database({ throwOnNotFound: false });
@@ -78,14 +79,7 @@ exports.main = async (event, context) => {
       const { user_id: end_luck_user_id } = luck_user;
       await db.collection('prize').doc(prize_id).update({ data: { end_luck_user_id, end_luck_code } });
       /** 保存当前生成数据过程 */
-      const date = new Date();
-      const year = date.getFullYear();
-      const month = `${date.getMonth() + 1}`.padStart(2, 0);
-      const day = `${date.getDate()}`.padStart(2, 0);
-      const hour = `${date.getHours()}`.padStart(2, 0);
-      const min = `${date.getMinutes()}`.padStart(2, 0);
-      const sec = `${date.getSeconds()}`.padStart(2, 0);
-      const time_str = `${year}-${month}-${day} ${hour}:${min}:${sec}`;
+      const time_str = moment().format('YYYY-MM-DD HH:mm:ss');
       const xlsx_data = [];
       xlsx_data.push(['中奖用户(中奖码)', '对应的md5']);
       xlsx_data.push([end_luck_code, getMd5(end_luck_code)]);
