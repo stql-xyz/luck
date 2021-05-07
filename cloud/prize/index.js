@@ -1,6 +1,7 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk');
 const TcbRouter = require('tcb-router');
+const moment = require('moment');
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 const db = cloud.database({ throwOnNotFound: false });
 const _ = db.command;
@@ -189,14 +190,8 @@ exports.main = async (event, context) => {
       const { prize_id } = event;
       const { total: prize_total } = await db.collection('prize_user').where({ prize_id }).count();
       const prize_key = `${prize_total + 1}`.padStart(6, 0);
-      const date = new Date();
-      const year = date.getFullYear();
-      const month = `${date.getMonth() + 1}`.padStart(2, 0);
-      const day = `${date.getDate()}`.padStart(2, 0);
-      const hour = `${date.getHours()}`.padStart(2, 0);
-      const min = `${date.getMinutes()}`.padStart(2, 0);
-      const sec = `${date.getSeconds()}`.padStart(2, 0);
-      const prize_code = `${prize_key}_${year}-${month}-${day}_${hour}:${min}:${sec}`;
+      const format_time = moment().format('YYYY-MM-DD_HH:mm:ss');
+      const prize_code = `${prize_key}_${format_time}`;
       await db.collection('prize_user').add({
         data: { user_id, prize_id, prize_key, prize_code },
       });

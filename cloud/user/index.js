@@ -4,8 +4,6 @@ const got = require('got');
 const TcbRouter = require('tcb-router');
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 const db = cloud.database({ throwOnNotFound: false });
-const _ = db.command;
-const $ = db.command.aggregate;
 const log = cloud.logger();
 
 // 云函数入口函数
@@ -25,7 +23,7 @@ exports.main = async (event, context) => {
       await db.collection('user').doc(user_id).update({ data: { ...user }});
       ctx.body = { ok: true };
     } catch (error) {
-      log.error({ name: 'get_prize', error });
+      log.error({ name: 'set_userInfo', error });
 		  ctx.body = { ok: false };
     }
   })
