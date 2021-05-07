@@ -14,6 +14,10 @@
   <row-cell title="历史记录" link="/pages/history/history">
     <text slot="icon" class="iconfont icon-history"></text>
   </row-cell>
+  <row-cell title="关注我们" link="/pages/web_view/web_view?aid=https://mp.weixin.qq.com/s/hL0zd5fx9QGpaPMug4ijbA">
+    <text slot="icon" class="iconfont icon-guanzhu"></text>
+  </row-cell>
+  <view style="margin-top: 30px"></view>
   <row-cell title="抽奖算法" link="/pages/web_view/web_view?aid=https://mp.weixin.qq.com/s/15-tC0uSEVuDBxdtksgS0g">
     <text slot="icon" class="iconfont icon-suanfa"></text>
   </row-cell>

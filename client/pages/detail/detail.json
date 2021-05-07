@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "user-item": "/components/user_item/user_item"
+    "user-item": "/components/user_item/user_item",
+    "add-tip": "/components/add_tip/add_tip"
   },
   "navigationBarTitleText": ""
 }

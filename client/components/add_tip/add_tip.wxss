@@ -1,0 +1,33 @@
+/* components/add_tip/add_tip.wxss */
+.add-tip {
+  background: transparent;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.arrow {
+  width: 0;
+  height: 0;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent var(--font-color-1) transparent;
+}
+.body {
+  background-color: var(--font-color-1);
+  border-radius: 2px;
+  padding: 10px;
+  color: var(--white);
+}
+.body .tip-btm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.body .icon-close {
+  font-size: 36rpx;
+  margin-right: 1rem;
+}

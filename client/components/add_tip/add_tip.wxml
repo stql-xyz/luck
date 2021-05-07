@@ -1,0 +1,17 @@
+<!--components/add_tip/add_tip.wxml-->
+<view wx:if="{{showTip}}" class="add-tip" bindtap="handleCloseTip">
+  <view class="arrow" style="margin-right: {{arrowR}}px"></view>
+  <view class="body" style="margin-right: {{bodyR}}px">
+    <view class="tip-top">
+      <text>点击</text>
+      <text class="iconfont icon-dot"></text>
+      <text class="iconfont icon-dot icon-big"></text>
+      <text class="iconfont icon-dot"></text>
+      <text>添加到我的小程序</text>
+    </view>
+    <view class="tip-btm">
+      <view>抽奖更方便</view>
+      <view class="iconfont icon-close"></view>
+    </view>
+  </view>
+</view>

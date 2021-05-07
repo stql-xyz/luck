@@ -43,6 +43,18 @@ Page({
 				// 判断是否中奖
 				if (end_luck_user_id === user.user_id && prize_key.indexOf(end_luck_code) > -1) {
 					this.setData({ is_win: true });
+				} else if (prize_key.length > 0) {
+					this.setData({ is_win: false });
+				} else {
+					(hideLoading !== true) && wx.hideLoading();
+					const result = await COMFUN.wxPromise(wx.showModal)({
+						title: '提示',
+						content: '本次抽奖已结束、快去首页看看其他抽奖吧',
+					});
+					if (result.confirm) {
+						wx.switchTab({ url: 'pages/home/home' });
+					}
+					return;
 				}
 			}
 		} catch (error) {
@@ -111,11 +123,16 @@ Page({
 		wx.hideLoading();
 		this.setLoading = false;
 	},
-
+	/** 中奖复制微信号兑奖 */
 	handleCopy() {
 		COMFUN.vibrate();
 		const { wx_num } = this.data;
 		wx.setClipboardData({ data: wx_num });
+	},
+	/** 去公众号的详情页 */
+	handleGoActDtl() {
+		const url = '/pages/web_view/web_view?aid=https://mp.weixin.qq.com/s/hL0zd5fx9QGpaPMug4ijbA';
+		wx.navigateTo({ url });
 	},
 
 	onLoad: function (options) {

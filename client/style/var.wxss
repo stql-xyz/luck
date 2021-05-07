@@ -38,6 +38,7 @@ page {
   --font-size-0: 34rpx;
   --font-size-1: 32rpx;
   --font-size-2: 28rpx;
+  --font-size-3: 24rpx;
 
   --border-0: 1px solid rgba(0, 0, 0, 0.3);
   --border-1: 1px solid rgba(0, 0, 0, 0.1);

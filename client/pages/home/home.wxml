@@ -1,4 +1,5 @@
 <!--pages/home/home.wxml-->
+<add-tip />
 <view class="hide-scroll">
   <view wx:if="{{prize_list.length}}">
     <view

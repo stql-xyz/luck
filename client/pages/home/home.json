@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "empty-data": "/components/empty_data/empty_data"
+    "empty-data": "/components/empty_data/empty_data",
+    "add-tip": "/components/add_tip/add_tip"
   },
   "navigationBarTitleText": "免费抽奖",
   "enablePullDownRefresh": true

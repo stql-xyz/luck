@@ -1,4 +1,5 @@
 <!--client/pages/detail/detail.wxml-->
+<add-tip />
 <scroll-view
   class="hide-scroll"
   scroll-y
@@ -21,6 +22,14 @@
     <view class="prize">
       <view class="desc-title">抽奖说明</view>
       <view class="desc-dtl">{{prize_dtl.prize_desc}}</view>
+      <view class="ads" bindtap="handleGoActDtl">
+        <view class="iconfont icon-weixin"></view>
+        <view class="content">
+          <view>福利社</view>
+          <view class="text">不定期会有福利送出哦</view>
+        </view>
+        <view class="button">点击关注</view>
+      </view>
     </view>
   </view>
   <view class="prize" style="min-height: 100rpx">

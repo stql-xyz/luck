@@ -1,8 +1,7 @@
 /* components/mine/row_cell/row_cell.wxss */
 .row {
   margin-top: var(--space-4);
-  padding: 28rpx var(--space-2);
-  border-radius: var(--space-4);
+  padding: 20rpx var(--space-2);
   border: var(--border-1);
   background-color: var(--white);
   display: flex;
