@@ -1,0 +1,12 @@
+{
+  "name": "yxcp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://gitee.com/a10/yxcp.git",
+  "author": "许华 <3140877089@qq.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.20.0"
+  }
+}

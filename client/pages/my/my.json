@@ -2,5 +2,6 @@
   "usingComponents": {
     "row-cell": "/components/row_cell/row_cell"
   },
+  "navigationBarTitleText": "我的",
   "enablePullDownRefresh": true
 }

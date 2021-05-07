@@ -14,7 +14,7 @@
   <row-cell title="历史记录" link="/pages/history/history">
     <text slot="icon" class="iconfont icon-history"></text>
   </row-cell>
-  <row-cell title="抽奖算法" link="/pages/web_view/web_view">
+  <row-cell title="抽奖算法" link="/pages/web_view/web_view?aid=https://mp.weixin.qq.com/s/15-tC0uSEVuDBxdtksgS0g">
     <text slot="icon" class="iconfont icon-suanfa"></text>
   </row-cell>
   <button open-type="contact" class="no-sty" hover-class="none">

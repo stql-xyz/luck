@@ -1,2 +1,2 @@
 <!--client/pages/web_view/web_view.wxml-->
-<web-view src="{{articleSrc}}"></web-view>
+<web-view wx:if="{{articleSrc}}" src="{{articleSrc}}"></web-view>

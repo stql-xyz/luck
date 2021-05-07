@@ -3,20 +3,20 @@ Component({
 
 	options: {
 		addGlobalClass: true,
-  },
+	},
 
-  properties: {
-    prize_user: Object,
-  },
+	properties: {
+		prize_user: Object,
+	},
 
-  data: {
-    isOpen: false,
-  },
+	data: {
+		isOpen: false,
+	},
 
-  methods: {
-    handleChangeOpen() {
-      const { isOpen } = this.data;
-      this.setData({ isOpen: !isOpen });
-    }
-  }
-})
+	methods: {
+		handleChangeOpen() {
+			const { isOpen } = this.data;
+			this.setData({ isOpen: !isOpen });
+		}
+	}
+});
