@@ -11,6 +11,8 @@ const _ = db.command;
 const $ = db.command.aggregate;
 const log = cloud.logger();
 
+const ACTIVE_RES = 'Pumq7uKH8RW3Kxlw2G_bQKgM5-S-y8mTXY3PkgsC5ts';
+
 function getNearValue(luck_value, beforeValue, afterValue) {
 	if (!beforeValue && !afterValue) {
 		throw new Error('');
@@ -98,6 +100,36 @@ exports.main = async () => {
 			});
 			await db.collection('prize').doc(prize_id).update({ data: { is_end: true, end_raw_data: fileID } });
 			md5Chche.clear();
+			// 所有用户通知
+			const { data = {} } = await db.collection('prize').doc(prize_id).get();
+			const { list = [] } = await db.collection('prize_user')
+				.aggregate()
+				.match({ prize_id })
+				.lookup({ from: 'user', localField: 'user_id', foreignField: '_id', as: 'userinfo' })
+				.addFields({ _openid: '$userinfo._openid' })
+				.project({ _openid: true })
+				.group({ _id: null, _openid: $.push('$_openid' )})
+				.end();
+			const { _openid = [] } = list[0] || {};
+			const filter_openid = [...new Set(..._openid)];
+			for(let i = 0; i < filter_openid.length; i ++) {
+				const touser = filter_openid[i];
+				try {
+					await cloud.openapi.subscribeMessage.send({
+						touser,
+						page: 'pages/detail/detail?prize_id=' + prize_id,
+						data: {
+							thing7: { value: '中奖用户已公布' },
+							thing6: { value: data.prize_title },
+							thing4: { value: '点击查看你有没有中奖' },
+						},
+						templateId: ACTIVE_RES,
+					});
+				} catch (error) {
+					log.error({ error, touser });
+				}
+			}
+			return filter_openid.length;
 		} catch (error) {
 			log.error({ name: 'prize_end', error });
 		}

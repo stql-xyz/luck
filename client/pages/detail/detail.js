@@ -3,6 +3,8 @@ import COMFUN from '../../utils/comfun';
 import LISTEN from '../../utils/listen';
 import USER from '../../utils/user';
 
+const ACTIVE_NEW = '0NQKCZqMCr-i9pYYtw2qm469uDwnrTMv8WD1BmeH1yo';
+const ACTIVE_RES = 'Pumq7uKH8RW3Kxlw2G_bQKgM5-S-y8mTXY3PkgsC5ts';
 Page({
 
 	data: {
@@ -92,6 +94,12 @@ Page({
 	/** 抽奖 */
 	setLoading: false,
 	async setPrize() {
+		try {
+			const tmplIds = [ACTIVE_NEW, ACTIVE_RES];
+			await COMFUN.wxPromise(wx.requestSubscribeMessage)({ tmplIds });
+		} catch (error) {
+			console.log(error);
+		}
 		const { prize_id } = this.data;
 		const user = USER.getUser();
 		if (!prize_id || !user || this.setLoading) return;

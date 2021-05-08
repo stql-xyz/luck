@@ -142,6 +142,29 @@ exports.main = async (event) => {
 			ctx.body = { ok: false };
 		}
 	});
+	/** 通知所有用户抽奖 */
+	const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+	const setNewActiveMsg = async (prize_id) => {
+		const { data = [] } = await db.collection('user').field({ _openid: true }).get();
+		for(let i = 0; i < data.length; i ++) {
+			await sleep(1000 * 2);
+			const touser = data[i]._openid;
+			try {
+				await cloud.openapi.subscribeMessage.send({
+					touser,
+					page: 'pages/detail/detail?prize_id=' + prize_id,
+					data: {
+						thing1: { value: `免费抽${prize_title}已经开始了` },
+						thing2: { value: moment.format('YYYY年MM月DD日') },
+						thing7: { value: '快来看看吧' },
+					},
+					templateId: ACTIVE_RES,
+				});
+			} catch (error) {
+				log.error({ error, touser });
+			}
+		}
+	}
 	/** 设置抽奖 */
 	app.router('set_prize', async (ctx) => {
 		const { user_id, cover, prize_end, prize_title, prize_desc } = event;
@@ -149,7 +172,9 @@ exports.main = async (event) => {
 			if (prize_id) {
 				await db.collection('prize').doc(prize_id).update({ data: { cover, prize_end, prize_title, prize_desc, update_time: db.serverDate() }});
 			} else {
+				// prize_id 的值等待赋值
 				await db.collection('prize').add({ data: { user_id, cover, prize_end, prize_title, prize_desc, create_time: db.serverDate() }});
+				setNewActiveMsg(prize_id);
 			}
 			ctx.body = { ok: true };
 		} catch (error) {
