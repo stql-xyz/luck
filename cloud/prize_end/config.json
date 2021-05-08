@@ -1,6 +1,12 @@
 {
   "permissions": {
-    "openapi": [
-    ]
-  }
+    "openapi": ["subscribeMessage.send"]
+  },
+  "triggers": [
+    {
+      "name": "send_submsg",
+      "type": "timer",
+      "config": "0 50 22 * * SAT *"
+    }
+  ]
 }

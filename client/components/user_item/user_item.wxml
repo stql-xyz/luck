@@ -1,7 +1,7 @@
 <!--components/user_item/user_item.wxml-->
 <view class="user-item" bindtap="handleChangeOpen">
   <view class="user" wx:if="{{prize_user._id}}">
-    <image lazy-load="{{true}}" class="avatar" src="{{prize_user.avatar_url}}" />
+    <image class="avatar" src="{{prize_user.avatar_url}}" />
     <block wx:if="{{prize_user.prize_key && prize_user.prize_key.length}}">
       <view class="user-key" wx:if="{{isOpen}}">
         <view>

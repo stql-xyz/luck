@@ -55,13 +55,13 @@ exports.main = async () => {
 			return md5Chche.get(key);
 		};
 		try {
-			const { list = [] } = await db.collection('prize_user')
+			const { list: prize_user_list = [] } = await db.collection('prize_user')
 				.aggregate()
 				.match({ prize_id })
 				.project({ prize_code: true })
 				.group({ _id: null, prize_code: $.push('$prize_code' )})
 				.end();
-			const { prize_code = [] } = list[0] || {};
+			const { prize_code = [] } = prize_user_list[0] || {};
 			const md5_list = prize_code.map(item => getMd5(item));
 			/** 获取luck_key */
 			const url = 'https://stock.xueqiu.com/v5/stock/realtime/quotec.json?symbol=SH000001';
@@ -102,7 +102,7 @@ exports.main = async () => {
 			md5Chche.clear();
 			// 所有用户通知
 			const { data = {} } = await db.collection('prize').doc(prize_id).get();
-			const { list = [] } = await db.collection('prize_user')
+			const { list: prize_user_notice = [] } = await db.collection('prize_user')
 				.aggregate()
 				.match({ prize_id })
 				.lookup({ from: 'user', localField: 'user_id', foreignField: '_id', as: 'userinfo' })
@@ -110,7 +110,7 @@ exports.main = async () => {
 				.project({ _openid: true })
 				.group({ _id: null, _openid: $.push('$_openid' )})
 				.end();
-			const { _openid = [] } = list[0] || {};
+			const { _openid = [] } = prize_user_notice[0] || {};
 			const filter_openid = [...new Set(..._openid)];
 			for(let i = 0; i < filter_openid.length; i ++) {
 				const touser = filter_openid[i];

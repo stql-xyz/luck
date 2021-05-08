@@ -18,7 +18,7 @@
     <text slot="icon" class="iconfont icon-guanzhu"></text>
   </row-cell>
   <view style="margin-top: 30px"></view>
-  <row-cell title="抽奖算法" link="/pages/web_view/web_view?aid=https://mp.weixin.qq.com/s/15-tC0uSEVuDBxdtksgS0g">
+  <row-cell title="抽奖算法" link="/pages/web_view/web_view?aid=https://mp.weixin.qq.com/s/xUIJErDByb7B6yJoxirN3A">
     <text slot="icon" class="iconfont icon-suanfa"></text>
   </row-cell>
   <button open-type="contact" class="no-sty" hover-class="none">

@@ -62,7 +62,7 @@ Page({
 			wx.showLoading({ title: '加载中...' });
 			const user = USER.getUser();
 			const cloud_res = await wx.cloud.callFunction({
-				name: 'prize',
+				name: 'prize_set',
 				data: {
 					$url: 'set_prize',
 					user_id: user._id,

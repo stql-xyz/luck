@@ -43,7 +43,7 @@ Page({
 				const { end_luck_user_id, end_luck_code } = this.data.prize_dtl;
 				const { prize_key = [] } = this.data.prize_cur;
 				// 判断是否中奖
-				if (end_luck_user_id === user.user_id && prize_key.indexOf(end_luck_code) > -1) {
+				if (end_luck_user_id === user._id && prize_key.indexOf(end_luck_code) > -1) {
 					this.setData({ is_win: true });
 				} else if (prize_key.length > 0) {
 					this.setData({ is_win: false });

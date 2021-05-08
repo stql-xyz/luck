@@ -12,6 +12,7 @@ const log = cloud.logger();
 exports.main = async (event) => {
 	const app = new TcbRouter({ event });
 	const { user_id, prize_id } = event;
+	// ------------------------首页
 	/** 获取抽奖列表 */
 	app.router('get_prize_list', async (ctx) => {
 		try {
@@ -48,6 +49,8 @@ exports.main = async (event) => {
 			ctx.body = { ok: false };
 		}
 	});
+	
+	// ------------------------抽奖详情页面
 	/** 获取当前用户抽奖列表详情 */
 	app.router('get_prize_list_history', async (ctx) => {
 		try {
@@ -130,58 +133,6 @@ exports.main = async (event) => {
 			ctx.body = { ok: false };
 		}
 	});
-	/** 抽奖分析 */
-	app.router('get_analysis', async (ctx) => {
-		try {
-			const { data: prize } = await db.collection('prize').doc(prize_id).get();
-			const { prize_title, end_raw_data, end_factor } = prize;
-			const { total: key_total } = await db.collection('prize_user').where({ prize_id }).count();
-			ctx.body = { ok: true, prize_title, end_raw_data, end_factor, key_total };
-		} catch (error) {
-			log.error({ name: 'get_analysis', error });
-			ctx.body = { ok: false };
-		}
-	});
-	/** 通知所有用户抽奖 */
-	const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
-	const setNewActiveMsg = async (prize_id) => {
-		const { data = [] } = await db.collection('user').field({ _openid: true }).get();
-		for(let i = 0; i < data.length; i ++) {
-			await sleep(1000 * 2);
-			const touser = data[i]._openid;
-			try {
-				await cloud.openapi.subscribeMessage.send({
-					touser,
-					page: 'pages/detail/detail?prize_id=' + prize_id,
-					data: {
-						thing1: { value: `免费抽${prize_title}已经开始了` },
-						thing2: { value: moment.format('YYYY年MM月DD日') },
-						thing7: { value: '快来看看吧' },
-					},
-					templateId: ACTIVE_RES,
-				});
-			} catch (error) {
-				log.error({ error, touser });
-			}
-		}
-	}
-	/** 设置抽奖 */
-	app.router('set_prize', async (ctx) => {
-		const { user_id, cover, prize_end, prize_title, prize_desc } = event;
-		try {
-			if (prize_id) {
-				await db.collection('prize').doc(prize_id).update({ data: { cover, prize_end, prize_title, prize_desc, update_time: db.serverDate() }});
-			} else {
-				// prize_id 的值等待赋值
-				await db.collection('prize').add({ data: { user_id, cover, prize_end, prize_title, prize_desc, create_time: db.serverDate() }});
-				setNewActiveMsg(prize_id);
-			}
-			ctx.body = { ok: true };
-		} catch (error) {
-			log.error({ name: 'set_prize', error });
-			ctx.body = { ok: false };
-		}
-	});
 	/** 获取抽奖用户 */
 	app.router('get_prize_user', async (ctx) => {
 		try {
@@ -189,7 +140,7 @@ exports.main = async (event) => {
 			const { list = [] } = await db.collection('prize_user')
 				.aggregate()
 				.match({ prize_id })
-				.sort({ prize_time: 1 })
+				.sort({ prize_key: -1 })
 				.skip(total)
 				.limit(limit)
 				.lookup({ from: 'user', localField: 'user_id', foreignField: '_id', as: 'userinfo' })
@@ -237,6 +188,20 @@ exports.main = async (event) => {
 		} catch (error) {
 			console.log(error);
 			log.error({ name: 'set_prize_join', error });
+			ctx.body = { ok: false };
+		}
+	});
+	
+	// ------------------------抽奖分析页
+	/** 抽奖分析 */
+	app.router('get_analysis', async (ctx) => {
+		try {
+			const { data: prize } = await db.collection('prize').doc(prize_id).get();
+			const { prize_title, end_raw_data, end_factor } = prize;
+			const { total: key_total } = await db.collection('prize_user').where({ prize_id }).count();
+			ctx.body = { ok: true, prize_title, end_raw_data, end_factor, key_total };
+		} catch (error) {
+			log.error({ name: 'get_analysis', error });
 			ctx.body = { ok: false };
 		}
 	});
