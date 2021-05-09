@@ -160,4 +160,14 @@ Page({
 	onPullDownRefresh: function () {
 
 	},
+
+	onShareAppMessage: function () {
+		const { cover, _id, prize_title } = this.data.prize_dtl || {};
+		const { nickname } = USER.getUser() || {};
+		const title = `${nickname}邀请你免费参加【${prize_title}】抽奖`;
+		const path = `/pages/detail/detail?prize_id=${_id}`;
+		const result = { title, path };
+		cover && (result.imageUrl = cover);
+		return result;
+	}
 });
