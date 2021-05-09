@@ -6,7 +6,7 @@
     {
       "name": "send_submsg",
       "type": "timer",
-      "config": "0 50 22 * * SAT *"
+      "config": "10 0 * * * * *"
     }
   ]
 }

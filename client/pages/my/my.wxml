@@ -31,7 +31,7 @@
       <text slot="icon" class="iconfont icon-question"></text>
     </row-cell>
   </button>
-  <row-cell wx:if="{{user && user._id === '28ee4e3e6092b276162d8b231806c8c2'}}" title="编辑抽奖" link="/pages/edit_list/edit_list">
+  <row-cell wx:if="{{user && user._id === '28ee4e3e6097ae94173afa7d0fa61f91'}}" title="编辑抽奖" link="/pages/edit_list/edit_list">
     <text slot="icon" class="iconfont icon-add"></text>
   </row-cell>
 </view>

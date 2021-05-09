@@ -39,7 +39,7 @@ class User {
 			console.log(error);
 		}
 		if (!userProfile) return;
-		wx.showLoading({ title: '加载中...' });
+		wx.showLoading();
 		try {
 			const cloud_res = await wx.cloud.callFunction({
 				name: 'user',

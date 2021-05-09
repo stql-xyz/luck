@@ -8,81 +8,85 @@
   lower-threshold="100"
   bindscrolltolower="getPrizeUser"
 >
-  <view>
-    <view class="showimage">
-      <image class="image" mode="heightFix" src="{{prize_dtl.cover}}" />
-    </view>
-    <view class="prize" style="margin-top: 0">
-      <view>
-        <text class="prize-title">奖品: {{prize_dtl.prize_title}}</text>
-        <text wx:if="{{prize_dtl.prize_title}}">x1份</text>
+  <view class="wraper">
+    <view>
+      <view class="showimage">
+        <image class="image" mode="heightFix" src="{{prize_dtl.cover}}" />
       </view>
-      <view class="open">开奖时间: {{prize_dtl.prize_end}}</view>
+      <view class="prize" style="margin-top: 0">
+        <view>
+          <text class="prize-title">奖品: {{prize_dtl.prize_title}}</text>
+          <text wx:if="{{prize_dtl.prize_title}}">x1份</text>
+        </view>
+        <view class="open">开奖时间: {{prize_dtl.prize_end}}</view>
+      </view>
+      <view class="prize">
+        <view class="desc-title">抽奖说明</view>
+        <view class="desc-dtl">
+          <text decode="{{true}}" space="nbsp">{{prize_dtl.prize_desc}}</text>
+        </view>
+        <view class="ads" bindtap="handleGoActDtl">
+          <view class="iconfont icon-weixin"></view>
+          <view class="content">
+            <view>小雪抽礼物</view>
+            <view class="text">每周都会有有福利送出哦</view>
+          </view>
+          <view class="button">点击关注</view>
+        </view>
+      </view>
+    </view>
+    <view class="prize" style="min-height: 100rpx">
+      <block wx:if="{{prize_dtl.is_end}}">
+        <block wx:if="{{is_win === true}}">
+          <view class="join-btn">
+            <view style="margin-bottom: 10rpx">恭喜</view>
+            <view>中奖啦</view>
+          </view>
+          <view class="join-tip" bindtap="handleCopy">添加下方客服微信兑奖</view>
+          <view class="service" bindtap="handleCopy">
+            <view class="wx">{{wx_num}}</view>
+            <view class="copy">点击复制</view>
+          </view>
+        </block>
+        <block wx:if="{{is_win === false}}">
+          <view class="fail-btn">
+            很遗憾、未中奖
+          </view>
+          <user-item prize_user="{{prize_cur}}" />
+        </block>
+      </block>
+      <block wx:else>
+        <block wx:if="{{prize_cur._id}}">
+          <view class="join-btn-wait">待开奖</view>
+          <view class="cur-user">
+            <user-item prize_user="{{prize_cur}}" />
+          </view>
+        </block>
+        <view wx:elif="{{prize_cur}}" class="join-btn" bindtap="setPrize">点击参与</view>
+        <!-- <view class="join-btn">去观看</view>
+        <view class="join-tip">观看视频提高一倍中奖机会</view> -->
+      </block>
+    </view>
+    <view wx:if="{{prize_dtl.is_end}}" class="prize">
+      <view class="users-title">中奖用户</view>
+      <view class="end_luck">
+        <image class="avatar" src="{{prize_dtl.end_luck_user_avatar}}" />
+        <view class="key">{{prize_dtl.end_luck_code}}</view>
+        <navigator wx:if="{{prize_id && prize_user_count}}" url="/pages/analysis/analysis?prize_id={{prize_id}}&user_count={{prize_user_count}}" class="iconfont icon-question"></navigator>
+      </view>
     </view>
     <view class="prize">
-      <view class="desc-title">抽奖说明</view>
-      <view class="desc-dtl">{{prize_dtl.prize_desc}}</view>
-      <view class="ads" bindtap="handleGoActDtl">
-        <view class="iconfont icon-weixin"></view>
-        <view class="content">
-          <view>福利社</view>
-          <view class="text">不定期会有福利送出哦</view>
-        </view>
-        <view class="button">点击关注</view>
+      <view class="users-title">
+        中奖码
+        <text wx:if="{{prize_user_count}}">（已有{{prize_user_count}}人参与）</text>
       </view>
-    </view>
-  </view>
-  <view class="prize" style="min-height: 100rpx">
-    <block wx:if="{{prize_dtl.is_end}}">
-      <block wx:if="{{is_win === true}}">
-        <view class="join-btn">
-          <view style="margin-bottom: 10rpx">恭喜</view>
-          <view>中奖啦</view>
-        </view>
-        <view class="join-tip" bindtap="handleCopy">添加下方客服微信兑奖</view>
-        <view class="service" bindtap="handleCopy">
-          <view class="wx">{{wx_num}}</view>
-          <view class="copy">点击复制</view>
-        </view>
+      <block wx:for="{{prize_user}}" wx:key="_id">
+        <user-item prize_user="{{item}}" />
       </block>
-      <block wx:if="{{is_win === false}}">
-        <view class="fail-btn">
-          很遗憾、未中奖
-        </view>
-        <user-item prize_user="{{prize_cur}}" />
-      </block>
-    </block>
-    <block wx:else>
-      <block wx:if="{{prize_cur._id}}">
-        <view class="join-btn-wait">待开奖</view>
-        <view class="cur-user">
-          <user-item prize_user="{{prize_cur}}" />
-        </view>
-      </block>
-      <view wx:elif="{{prize_cur}}" class="join-btn" bindtap="setPrize">点击参与</view>
-      <!-- <view class="join-btn">去观看</view>
-      <view class="join-tip">观看视频提高一倍中奖机会</view> -->
-    </block>
-  </view>
-  <view wx:if="{{prize_dtl.is_end}}" class="prize">
-    <view class="users-title">中奖用户</view>
-    <view class="end_luck">
-      <image class="avatar" src="{{prize_dtl.end_luck_user_avatar}}" />
-      <view class="key">{{prize_dtl.end_luck_code}}</view>
-      <navigator wx:if="{{prize_id && prize_user_count}}" url="/pages/analysis/analysis?prize_id={{prize_id}}&user_count={{prize_user_count}}" class="iconfont icon-question"></navigator>
-    </view>
-  </view>
-  <view class="prize">
-    <view class="users-title">
-      中奖码
-      <text wx:if="{{prize_user_count}}">（已有{{prize_user_count}}人参与）</text>
-    </view>
-    <block wx:for="{{prize_user}}" wx:key="_id">
-      <user-item prize_user="{{item}}" />
-    </block>
-    <view class="bottom-tip">
-      <view wx:if="{{loading}}" class="loading">正在加载中.......</view>
-      <view wx:elif="{{down}}" class="down">已显示全部</view>
+      <view class="bottom-tip">
+        <view wx:if="{{loading}}" class="loading">正在加载中.......</view>
+        <view wx:elif="{{down}}" class="down">已显示全部</view>
+      </view>
     </view>
   </view>
 </scroll-view>

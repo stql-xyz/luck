@@ -1,6 +1,6 @@
 import USER from './utils/user';
 import LOG from './utils/log';
-const CLOUD_ENV = 'test-9gxmzpqr89aa5721';
+const CLOUD_ENV = 'prod-4gb0rayw4833ba54';
 App({
 	onLaunch: function () {
 		if (!wx.cloud) {

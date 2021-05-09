@@ -140,7 +140,7 @@ exports.main = async (event) => {
 			const { list = [] } = await db.collection('prize_user')
 				.aggregate()
 				.match({ prize_id })
-				.sort({ prize_key: -1 })
+				.sort({ prize_key: 1 })
 				.skip(total)
 				.limit(limit)
 				.lookup({ from: 'user', localField: 'user_id', foreignField: '_id', as: 'userinfo' })

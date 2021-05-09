@@ -94,22 +94,26 @@ Page({
 	/** 抽奖 */
 	setLoading: false,
 	async setPrize() {
-		try {
-			const tmplIds = [ACTIVE_NEW, ACTIVE_RES];
-			await COMFUN.wxPromise(wx.requestSubscribeMessage)({ tmplIds });
-		} catch (error) {
-			console.log(error);
-		}
 		const { prize_id } = this.data;
 		const user = USER.getUser();
 		if (!prize_id || !user || this.setLoading) return;
+		COMFUN.vibrate();
 		this.setLoading = true;
 		if (!user.avatar_url) {
 			await USER.updateCloudUser();
-		}
-		if (!USER.getUser().avatar_url) {
-			COMFUN.showErrModal({ content: '请先授权获取头像信息' });
-			return;
+			if (!USER.getUser().avatar_url) {
+				COMFUN.showErrModal({ content: '请先授权获取头像信息' });
+			} else {
+				COMFUN.showErrModal({ content: '头像更新成功、请重新点击参与' });
+			}
+			return this.setLoading = false;
+		} else {
+			try {
+				const tmplIds = [ACTIVE_NEW, ACTIVE_RES];
+				await COMFUN.wxPromise(wx.requestSubscribeMessage)({ tmplIds });
+			} catch (error) {
+				console.log(error);
+			}
 		}
 		wx.showLoading({ title: '加载中...' });
 		try {

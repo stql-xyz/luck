@@ -1,8 +1,14 @@
 /* client/pages/detail/detail.wxss */
+.hide-scroll {
+  padding-right: 0;
+}
+.hide-scroll .wraper {
+  margin-right: 20vw;
+}
 .showimage {
-  margin-top: var(--space-4);
-  width: 100vw;
-  text-align: center;
+  margin: 10px;
+  margin-bottom: 0;
+  overflow: hidden;
 }
 .prize {
   margin: var(--space-4);
@@ -24,10 +30,11 @@
 .desc-title {
   text-align: center;
   margin-bottom: 10px;
+  font-weight: bolder;
 }
 .desc-dtl {
   font-size: var(--font-size-2);
-  text-indent: 2em;
+  margin: 20px;
 }
 .ads {
   margin: 20px;
