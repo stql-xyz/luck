@@ -11,7 +11,14 @@
       "list": []
     },
     "miniprogram": {
-      "list": []
+      "list": [
+        {
+          "name": "pages/share/share",
+          "pathName": "pages/share/share",
+          "query": "",
+          "scene": null
+        }
+      ]
     }
   }
 }

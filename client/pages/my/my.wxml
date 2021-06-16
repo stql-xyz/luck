@@ -26,11 +26,11 @@
       <text slot="icon" class="iconfont icon-kefu"></text>
     </row-cell>
   </button>
-  <button open-type="feedback" class="no-sty" hover-class="none">
+  <!-- <button open-type="feedback" class="no-sty" hover-class="none">
     <row-cell title="问题与反馈">
       <text slot="icon" class="iconfont icon-question"></text>
     </row-cell>
-  </button>
+  </button> -->
   <row-cell wx:if="{{user && user._id === '28ee4e3e6097ae94173afa7d0fa61f91'}}" title="编辑抽奖" link="/pages/edit_list/edit_list">
     <text slot="icon" class="iconfont icon-add"></text>
   </row-cell>

@@ -67,6 +67,9 @@
         <view class="join-tip">观看视频提高一倍中奖机会</view> -->
       </block>
     </view>
+    <navigator wx:if="{{prize_dtl.is_end}}" title="抽奖算法" url="/pages/share/share?prize_id={{prize_dtl._id}}">
+      <button>分享该抽奖</button>
+    </navigator>
     <view wx:if="{{prize_dtl.is_end}}" class="prize">
       <view class="users-title">中奖用户</view>
       <view class="end_luck">

@@ -5,6 +5,7 @@ import USER from '../../utils/user';
 
 const ACTIVE_NEW = '0NQKCZqMCr-i9pYYtw2qm469uDwnrTMv8WD1BmeH1yo';
 const ACTIVE_RES = 'Pumq7uKH8RW3Kxlw2G_bQKgM5-S-y8mTXY3PkgsC5ts';
+const AppData = getApp().globalData;
 Page({
 
 	data: {
@@ -151,6 +152,33 @@ Page({
 		const { prize_id } = options;
 		this.setData({ prize_id }, this.getPrizeDtl);
 		LISTEN.on(this.getPrizeDtl);
+		setTimeout(() => {
+			this.loadShareData();
+		}, 3000);
+	},
+
+	async loadShareData() {
+		const { prize_dtl } = this.data;
+		const user = USER.getUser();
+		try {
+			if (!prize_dtl || !user) return;
+			const prize_id = prize_dtl._id;
+			if (!USER.getUserShare(prize_id, 'avatar_url')) {
+				const { tempFilePath: avatar_url } = await COMFUN.wxPromise(wx.cloud.downloadFile)({ fileID: user.avatar_url });
+				USER.setUserShare(prize_id, 'avatar_url', avatar_url);
+			}
+			// if (!USER.getUserShare(prize_id, 'qrcode_url')) {
+			// 	const page = 'pages/detail/detail';
+			// 	const { prize_id } = this.data;
+			// 	const cloud_res = await wx.cloud.callFunction({ name: 'user', data: { $url: 'get_qrcode', prize_id, user_id: user._id, page } });
+			// 	COMFUN.result(cloud_res);
+			// 	const { tempFilePath: qrcode_url } = await COMFUN.wxPromise(wx.cloud.downloadFile)({ fileID: cloud_res.result.data });
+			// 	USER.setUserShare(prize_id, 'qrcode_url', qrcode_url);
+			// }
+			console.log('OK');
+		} catch (error) {
+			console.log(error);
+		}
 	},
 
 	onUnload: function () {

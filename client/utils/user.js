@@ -4,6 +4,14 @@ import COMFUN from './comfun';
 class User {
 	constructor() {
 		this.user = undefined;
+		this.share = {};
+	}
+	setUserShare(prize_id, key, value) {
+		this.share[prize_id] = { ...(this.share[prize_id] || {}), [key]: value };
+	}
+	getUserShare(prize_id, key) {
+		if (!this.share[prize_id]) return '';
+		return this.share[prize_id][key];
 	}
 	setUser(user) {
 		if (typeof user === 'object') {

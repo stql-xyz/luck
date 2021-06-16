@@ -1,0 +1,7 @@
+<!--client/pages/share/share.wxml-->
+<view class="share">
+  <view>分享</view>
+  <image class="image" mode="widthFix" src="{{sharePath}}"/>
+  <button bindtap="handleSavePhoto">点击</button>
+</view>
+<painter style="position: absolute; top: -9999rpx;" palette="{{imgDraw}}" bind:imgOK="onImgOK" />
