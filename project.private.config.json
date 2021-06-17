@@ -11,7 +11,20 @@
       "list": []
     },
     "miniprogram": {
-      "list": []
+      "list": [
+        {
+          "name": "pages/share/share",
+          "pathName": "pages/share/share",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/detail/detail",
+          "pathName": "pages/detail/detail",
+          "query": "prize_id=247d14ad6097ae8900abadb035bb510f",
+          "scene": null
+        }
+      ]
     }
   }
 }

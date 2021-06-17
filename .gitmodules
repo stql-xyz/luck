@@ -1,0 +1,3 @@
+[submodule "client/components/painter"]
+	path = client/components/painter
+	url = https://github.com/Kujiale-Mobile/PainterCore.git

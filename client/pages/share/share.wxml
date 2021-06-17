@@ -1,0 +1,7 @@
+<!--client/pages/share/share.wxml-->
+<view class="share">
+  <view>点击图片，长按发给好友</view>
+  <image bindtap="previewImage" class="image" mode="heightFix" src="{{sharePath}}"/>
+  <button class="save" bindtap="handleSavePhoto">保存到手机</button>
+</view>
+<painter style="position: absolute; top: -9999rpx;" palette="{{imgDraw}}" bind:imgOK="onImgOK" />

@@ -5,6 +5,19 @@ class User {
 	constructor() {
 		this.user = undefined;
 	}
+	setScene(scene) {
+		this.scene = scene;
+	}
+	async checkScene(user_id) {
+		if (!this.scene) return;
+		try {
+			const db = wx.cloud.database();
+			const { data } = await db.collection('user_share').doc(this.scene).field({ user_id }).get();
+			await db.collection('user').doc(user_id).update({ data: { inviter: data.user_id } });
+		} catch (error) {
+			console.log(error);
+		}
+	}
 	setUser(user) {
 		if (typeof user === 'object') {
 			this.user = { ...(this.user || {}), ...user };
@@ -23,6 +36,7 @@ class User {
 				await db.collection('user').add({ data: { nickname: '', avatar_url: '', create_time: db.serverDate() } });
 				data = (await db.collection('user').get()).data;
 			}
+			this.checkScene(data[0]._id);
 			this.setUser(data[0]);
 		} catch (error) {
 			COMFUN.showErr({ error, type: 'get_cloud_user' });

@@ -17,7 +17,8 @@
             <image class="avatar" mode="scaleToFill" src="{{item.avatar_url}}"/>
             <view class="name">{{item.nickname}}</view>
           </view>
-          <view wx:if="{{item.prize_user}}" class="right join">已参与</view>
+          <view wx:if="{{item.is_end}}" class="right join">已结束</view>
+          <view wx:elif="{{item.prize_user}}" class="right join">已参与</view>
           <view wx:else class="right">去抽奖</view>
         </view>
       </view>

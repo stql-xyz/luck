@@ -7,20 +7,22 @@
   background: var(--white);
 }
 .card .image {
-  width: 100vw;
+  width: 80vw;
+  margin: 10px auto;
+  height: 160px;
   vertical-align: middle;
 }
 .prize-title {
   text-align: left;
   border-top: var(--border-1);
-  padding: 10rpx 30rpx;
+  padding: 10rpx 40rpx;
   font-weight: bolder;
 }
 .bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10rpx 20rpx;
+  padding: 10rpx 40rpx;
   border-bottom: var(--border-1);
 }
 .bottom .left {
@@ -31,14 +33,13 @@
   width: 60rpx;
   height: 60rpx;
   border-radius: 50%;
-  margin-right: 20rpx;
+  margin-right: 50rpx;
   box-shadow: var(--shadow-avatar);
 }
 .bottom .name {
   font-size: var(--font-size-2);
 }
 .bottom .right {
-  margin-right: 30rpx;
   background: var(--font-red);
   color: #FFFFFF;
   font-weight: 300;

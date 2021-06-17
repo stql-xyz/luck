@@ -26,12 +26,12 @@
           <text decode="{{true}}" space="nbsp">{{prize_dtl.prize_desc}}</text>
         </view>
         <view class="ads" bindtap="handleGoActDtl">
-          <view class="iconfont icon-weixin"></view>
+          <view class="iconfont icon-xiaochengxu"></view>
           <view class="content">
-            <view>小雪抽礼物</view>
-            <view class="text">每周都会有有福利送出哦</view>
+            <view>经典逻辑推理题</view>
+            <view class="text">超多经典逻辑思维题等你来挑战</view>
           </view>
-          <view class="button">点击关注</view>
+          <view class="button">点击查看</view>
         </view>
       </view>
     </view>
@@ -67,6 +67,15 @@
         <view class="join-tip">观看视频提高一倍中奖机会</view> -->
       </block>
     </view>
+    <navigator
+      class="share-btn"
+      wx:if="{{prize_dtl._id && !prize_dtl.is_end}}"
+      title="抽奖算法"
+      url="/pages/share/share?prize_id={{prize_dtl._id}}&prize_title={{prize_dtl.prize_title}}&prize_end={{prize_dtl.prize_end}}"
+    >
+      <text class="iconfont icon-fenxiang"></text>
+      分享抽奖
+    </navigator>
     <view wx:if="{{prize_dtl.is_end}}" class="prize">
       <view class="users-title">中奖用户</view>
       <view class="end_luck">

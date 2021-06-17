@@ -9,7 +9,6 @@ Page({
 
 	data: {
 		wx_num: 'xh68833',
-
 		is_win: '',
 
 		prize_id: '',
@@ -143,13 +142,21 @@ Page({
 	},
 	/** 去公众号的详情页 */
 	handleGoActDtl() {
-		const url = '/pages/web_view/web_view?aid=https://mp.weixin.qq.com/s/hL0zd5fx9QGpaPMug4ijbA';
-		wx.navigateTo({ url });
+		COMFUN.vibrate();
+		wx.navigateToMiniProgram({
+			appId: 'wxc29ec4112b79eff0',
+			envVersion: 'release',
+		});
 	},
 
-	onLoad: function (options) {
-		const { prize_id } = options;
-		this.setData({ prize_id }, this.getPrizeDtl);
+	onLoad: async function (options) {
+		let { prize_id, scene } = options;
+		if (scene) {
+			const db = wx.cloud.database();
+			const { data } = await db.collection('user_share').doc(scene).field({ prize_id: true }).get();
+			prize_id = data.prize_id;
+		}
+		this.setData({ prize_id, scene }, this.getPrizeDtl);
 		LISTEN.on(this.getPrizeDtl);
 	},
 

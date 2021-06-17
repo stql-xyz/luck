@@ -6,9 +6,11 @@
   margin-right: 20vw;
 }
 .showimage {
-  margin: 10px;
-  margin-bottom: 0;
+  margin: 15px;
   overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .prize {
   margin: var(--space-4);
@@ -36,8 +38,22 @@
   font-size: var(--font-size-2);
   margin: 20px;
 }
+.share-btn {
+  position: fixed;
+  bottom: calc(50px + constant(safe-area-inset-bottom));
+  bottom: calc(50px + env(safe-area-inset-bottom));
+  right: 0;
+  color: var(--font-red);
+  border: 1px solid var(--font-yellow);
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+  border-top-left-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
+  background: var(--white);
+}
 .ads {
-  margin: 20px;
+  margin: 10px;
   padding: 10px;
   background: var(--font-color-3);
   display: flex;

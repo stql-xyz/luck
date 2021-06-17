@@ -7,8 +7,10 @@
     "pages/history/history",
     "pages/edit_list/edit_list",
     "pages/analysis/analysis",
-    "pages/web_view/web_view"
+    "pages/web_view/web_view",
+    "pages/share/share"
   ],
+  "navigateToMiniProgramAppIdList": ["wxc29ec4112b79eff0"],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",

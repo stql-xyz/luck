@@ -142,7 +142,7 @@ class Comfun {
 	}
 	/** 震动 */
 	vibrate() {
-		wx.vibrateShort({ type: 'heavy' });
+		wx.vibrateShort({ type: 'light' });
 	}
 }
 

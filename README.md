@@ -10,3 +10,6 @@
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
 
+
+// 更新painter
+git submodule add https://github.com/Kujiale-Mobile/PainterCore.git components/painter

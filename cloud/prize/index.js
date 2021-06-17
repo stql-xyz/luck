@@ -18,10 +18,11 @@ exports.main = async (event) => {
 		try {
 			const { list: data = [] } = await db.collection('prize')
 				.aggregate()
-				.match({ is_end: _.exists(false) })
+				.sort({ 'create_time': -1 })
 				.lookup({ from: 'user', localField: 'user_id', foreignField: '_id', as: 'userinfo' })
 				.addFields({ user_info: $.arrayElemAt(['$userinfo', 0]) })
 				.addFields({
+					'user_info.is_end': '$is_end',
 					'user_info.prize_id': '$_id',
 					'user_info.prize_title': '$prize_title',
 					'user_info.prize_end': '$prize_end',
@@ -30,6 +31,7 @@ exports.main = async (event) => {
 				.replaceRoot({ newRoot: '$user_info' })
 				.project({
 					_id: false,
+					is_end: true,
 					prize_id: true,
 					avatar_url: true,
 					nickname: true,
