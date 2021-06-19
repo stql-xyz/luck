@@ -35,7 +35,7 @@ exports.main = async (event) => {
     try {
       const user_share_id = getId();
       db.collection('user_share').add({ data: { _id: user_share_id, prize_id, user_id, create_time: db.serverDate() }}).then(() => {});
-      const { buffer } = await cloud.openapi.wxacode.getUnlimited({ page, scene: user_share_id, autoColor: true, isHyaline: true });
+      const { buffer } = await cloud.openapi.wxacode.getUnlimited({ page, scene: user_share_id });
       const { fileID } = await cloud.uploadFile({ cloudPath: `qrcode/${user_share_id}.png`, fileContent: buffer });
       ctx.body = { ok: true, data: fileID };
     } catch (error) {
